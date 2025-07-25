@@ -1,0 +1,17 @@
+version: '3'
+services:
+  ingest:
+    build:
+      context: ./ingest
+      dockerfile: ../Dockerfiles/Dockerfile.ingest
+    volumes:
+      - ./shared_data:/shared_data
+
+  transform:
+    build:
+      context: ./transform
+      dockerfile: ../Dockerfiles/Dockerfile.transform
+    volumes:
+      - ./shared_data:/shared_data
+    depends_on:
+      - ingest
